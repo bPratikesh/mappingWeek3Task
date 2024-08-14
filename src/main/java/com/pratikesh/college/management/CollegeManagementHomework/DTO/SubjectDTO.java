@@ -1,32 +1,33 @@
 package com.pratikesh.college.management.CollegeManagementHomework.DTO;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdmissionRecordDTO {
+public class SubjectDTO {
 
     private Long id;
-    private Integer fees;
-    private StudentDTO student;
+    private String title;
+    private ProfessorDTO professor;
+    private Set<StudentDTO> students;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AdmissionRecordDTO that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getFees(), that.getFees());
+        if (!(o instanceof SubjectDTO that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getTitle(), that.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFees());
+        return Objects.hash(getId(), getTitle());
     }
 }

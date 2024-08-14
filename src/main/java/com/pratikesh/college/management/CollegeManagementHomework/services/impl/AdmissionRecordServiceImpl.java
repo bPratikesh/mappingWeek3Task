@@ -2,9 +2,7 @@ package com.pratikesh.college.management.CollegeManagementHomework.services.impl
 
 import com.pratikesh.college.management.CollegeManagementHomework.DTO.AdmissionRecordDTO;
 import com.pratikesh.college.management.CollegeManagementHomework.entities.AdmissionRecordEntity;
-import com.pratikesh.college.management.CollegeManagementHomework.entities.StudentEntity;
 import com.pratikesh.college.management.CollegeManagementHomework.repositories.AdmissionRecordRepo;
-import com.pratikesh.college.management.CollegeManagementHomework.repositories.StudentRepo;
 import com.pratikesh.college.management.CollegeManagementHomework.services.AdmissionRecordService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,11 +14,10 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AdmissionRecordImpl implements AdmissionRecordService {
+public class AdmissionRecordServiceImpl implements AdmissionRecordService {
 
     private final ModelMapper modelMapper;
     private final AdmissionRecordRepo admissionRecordRepo;
-    private final StudentRepo studentRepo;
 
     @Override
     public AdmissionRecordDTO admitStudent(AdmissionRecordDTO admissionRecordDTO) {
@@ -39,11 +36,14 @@ public class AdmissionRecordImpl implements AdmissionRecordService {
 
     @Override
     public AdmissionRecordDTO getStudentById(Long studentId) {
-        boolean isExist = admissionRecordRepo.existsById(studentId);
-        if(!isExist) throw new RuntimeException("Admission record not found");
-
+        isExistById(studentId);
         Optional<AdmissionRecordEntity> admissionRecord = admissionRecordRepo.findById(studentId);
         return modelMapper.map(admissionRecord, AdmissionRecordDTO.class);
+    }
+
+    private void isExistById(Long id){
+        boolean isExist = admissionRecordRepo.existsById(id);
+        if(!isExist) throw new RuntimeException("Admission record not found");
     }
 
 }

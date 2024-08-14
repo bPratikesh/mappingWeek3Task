@@ -2,7 +2,6 @@ package com.pratikesh.college.management.CollegeManagementHomework.controllers;
 
 import com.pratikesh.college.management.CollegeManagementHomework.DTO.AdmissionRecordDTO;
 import com.pratikesh.college.management.CollegeManagementHomework.services.AdmissionRecordService;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,12 +30,4 @@ public class AdmissionRecordController {
     public AdmissionRecordDTO getStudentById(@PathVariable Long studentId){
         return admissionRecordService.getStudentById(studentId);
     }
-
-
-   /* TODO
-    @PutMapping()
-    public AdmissionRecordDTO assignStudentToAdmissionRecord(@PathVariable Long studentId, @PathVariable Long admissionId){
-        return admissionRecordService.assignStudentToAdmissionRecord(studentId, admissionId);
-    }*/
-
 }
