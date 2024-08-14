@@ -1,7 +1,10 @@
 package com.pratikesh.college.management.CollegeManagementHomework.controllers;
 
+import com.pratikesh.college.management.CollegeManagementHomework.DTO.ProfessorDTO;
 import com.pratikesh.college.management.CollegeManagementHomework.DTO.StudentDTO;
+import com.pratikesh.college.management.CollegeManagementHomework.DTO.SubjectDTO;
 import com.pratikesh.college.management.CollegeManagementHomework.services.StudentService;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,4 +33,13 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/assignedProfessors/{studentId}")
+    public List<ProfessorDTO> getAssignedProfessorsToStudent(@PathVariable Long studentId){
+        return studentService.getAssignedProfessorsToStudent(studentId);
+    }
+
+    @GetMapping("/assignedSubjects/{studentId}")
+    public List<SubjectDTO> getAssignedSubjectsToStudent(@PathVariable Long studentId){
+        return studentService.getAssignedSubjectsToStudent(studentId);
+    }
 }

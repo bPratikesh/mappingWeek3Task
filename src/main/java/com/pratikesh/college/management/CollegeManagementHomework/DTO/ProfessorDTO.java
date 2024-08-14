@@ -1,6 +1,7 @@
 package com.pratikesh.college.management.CollegeManagementHomework.DTO;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,9 @@ import java.util.Set;
 public class ProfessorDTO {
     private Long id;
     private String title;
+    @JsonIgnore
     private Set<SubjectDTO> subjects;
+
     private Set<StudentDTO> students;
 
     @Override

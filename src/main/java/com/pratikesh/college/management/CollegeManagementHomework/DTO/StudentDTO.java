@@ -1,6 +1,7 @@
 package com.pratikesh.college.management.CollegeManagementHomework.DTO;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pratikesh.college.management.CollegeManagementHomework.entities.AdmissionRecordEntity;
 import com.pratikesh.college.management.CollegeManagementHomework.entities.ProfessorEntity;
 import com.pratikesh.college.management.CollegeManagementHomework.entities.SubjectEntity;
@@ -22,8 +23,11 @@ public class StudentDTO {
 
     private Long id;
     private String name;
+    @JsonIgnore
     private AdmissionRecordDTO admittedStudent;
+    @JsonIgnore
     private Set<SubjectDTO> subjects;
+    @JsonIgnore
     private Set<ProfessorDTO> professors;
 
     @Override

@@ -26,8 +26,23 @@ public class AdmissionRecordController {
         return admissionRecordService.getAllAdmittedStudent();
     }
 
-    @GetMapping("/{studentId}")
-    public AdmissionRecordDTO getStudentById(@PathVariable Long studentId){
-        return admissionRecordService.getStudentById(studentId);
+    @GetMapping("/{admissionId}")
+    public AdmissionRecordDTO getStudentById(@PathVariable Long admissionId){
+        return admissionRecordService.getStudentById(admissionId);
     }
+
+    @DeleteMapping("/{admissionId}")
+    public boolean deleteStudentById(@PathVariable Long admissionId){
+        return admissionRecordService.deleteStudent(admissionId);
+    }
+    @PutMapping("/{admissionId}")
+    public AdmissionRecordDTO updateStudentDetailsById(@PathVariable Long admissionId, @RequestBody AdmissionRecordDTO admissionRecordDTO){
+        return admissionRecordService.updateStudentDetails(admissionId, admissionRecordDTO);
+    }
+
+    @PutMapping("/{studentId}/admissionRecord/{admissionId}")
+    public AdmissionRecordDTO assignStudentToAdmissionRecord(@PathVariable Long studentId, @PathVariable Long admissionId){
+        return admissionRecordService.assignStudentToAdmissionRecord(studentId,admissionId);
+    }
+
 }

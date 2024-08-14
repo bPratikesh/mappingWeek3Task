@@ -1,7 +1,11 @@
 package com.pratikesh.college.management.CollegeManagementHomework.services.impl;
 
+import com.pratikesh.college.management.CollegeManagementHomework.DTO.ProfessorDTO;
 import com.pratikesh.college.management.CollegeManagementHomework.DTO.StudentDTO;
+import com.pratikesh.college.management.CollegeManagementHomework.DTO.SubjectDTO;
+import com.pratikesh.college.management.CollegeManagementHomework.entities.ProfessorEntity;
 import com.pratikesh.college.management.CollegeManagementHomework.entities.StudentEntity;
+import com.pratikesh.college.management.CollegeManagementHomework.entities.SubjectEntity;
 import com.pratikesh.college.management.CollegeManagementHomework.repositories.StudentRepo;
 import com.pratikesh.college.management.CollegeManagementHomework.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +41,31 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.findAll()
                 .stream()
                 .map(studentEntity -> modelMapper.map(studentEntity, StudentDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProfessorDTO> getAssignedProfessorsToStudent(Long studentId) {
+        isExistsById(studentId);
+        List<ProfessorEntity> professorEntityList = studentRepo.findById(studentId)
+                .get().getProfessors()
+                .stream().toList();
+
+        return professorEntityList.stream()
+                .map(professorEntity -> modelMapper.map(professorEntity, ProfessorDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SubjectDTO> getAssignedSubjectsToStudent(Long studentId) {
+        isExistsById(studentId);
+
+        List<SubjectEntity> subjectEntityList = studentRepo.findById(studentId)
+                .get().getSubjects()
+                .stream().toList();
+
+        return subjectEntityList.stream()
+                .map(subjectEntity -> modelMapper.map(subjectEntity, SubjectDTO.class))
                 .collect(Collectors.toList());
     }
 
